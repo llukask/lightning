@@ -1,1 +1,8 @@
 language: java
+deploy:
+  provider: heroku
+  api_key:
+    secure: ovF2vxBuW+nTEPxVrNPwO0kKuH85ZbAs4WC/J+rN86CJB04b3/2WEWLQILVw5iMtqcYX5+Fi88O/gAs67U00GfutT3jkZ1QztjP53r41tYOyD4vsivkIpn/FeG4/VmjtGqpexgAgO4adcyE4G5psVg2niSCEAXLo3iXgkMNmibTfEjmgJHmXmGWIvLhgrIhna0nZkLr7wTZ0qm9+xj7Px2e/ffgCR/YdliBLt0EB/A8YdMp+tK5GujhAc+aKGEdzwdWZN3BTVTSxVOGx3qW78FitOxbF10ybAam7lFrYoeX1TgUwPiQ71rfWxTYbk/fsDK9hVHbi8b5BbYZlBQdW0WSV/c+DFr/8vfS2Foxe0g7Apy6eeCVqCJQjic2LbCg2XNh4myBb1QUx7AOTxyO1ArjD3fZEiOX7Xmwys2p8Ta/RuAgPNWe5j0XNEofuUr7t2MTMiUee7pOqlfUSTqmMLcJI6uZVmAXA0uQVx1lRU8n8I0zvG0C6Q35iklRbmnLFIA7MmpE5crfwgPa8knEKYCLcQTkOW/2xa42sA9ELN7rtaAiPpGF2VsshyU6fGwNWbD8TG6BYRkM/9C2o40QaO6t3jW3kLhyE2VIoUp/fSf5h7zkbtAzUIPl+4AxFhJrXbQbqn+dfFbpAPGADEn+3x0zkGc3Yoxc9CaSpGnIbIaU=
+  app: the-lightning
+  on:
+    repo: qwertzdarth/lightning
