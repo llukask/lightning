@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Lightning</title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+<script>
+
+    // This example adds a marker to indicate the position of Bondi Beach in Sydney,
+    // Australia.
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: {lat: 0, lng: 0}
+        });
+
+        var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+
+        var gradient = [
+            'rgba(0, 255, 255, 0)',
+            'rgba(0, 255, 255, 1)',
+            'rgba(0, 191, 255, 1)',
+            'rgba(0, 127, 255, 1)',
+            'rgba(0, 63, 255, 1)',
+            'rgba(0, 0, 255, 1)',
+            'rgba(0, 0, 223, 1)',
+            'rgba(0, 0, 191, 1)',
+            'rgba(0, 0, 159, 1)',
+            'rgba(0, 0, 127, 1)',
+            'rgba(63, 0, 91, 1)',
+            'rgba(127, 0, 63, 1)',
+            'rgba(191, 0, 31, 1)',
+            'rgba(255, 0, 0, 1)'
+        ]
+
+        axios.get("http://localhost:8080/lightning/?window=120").then(function (response) {
+            console.log(response);
+            var locations = _.map(response.data, function(cluster) {return cluster.location.coords});
+            var latlngs = _.map(locations, function (location) {
+                // console.log(location);
+                var marker = new google.maps.Marker({
+                    position: {lat: location.lat, lng: location.lon},
+                    map: map,
+                    icon: image
+                });
+
+                return {location: new google.maps.LatLng(location.lat, location.lon), weight: 1};
+            });
+            var heatMap = new google.maps.visualization.HeatmapLayer({
+                data: latlngs,
+                dissipating: false,
+                radius: 0.3,
+                opacity: 0.7,
+                gradient: gradient,
+                maxIntensity: 100
+            });
+            heatMap.setMap(map);
+        }).catch(function (error) {
+            console.log(error);
+
+        });
+
+        /*var beachMarker = new google.maps.Marker({
+            position: {lat: -33.890, lng: 151.274},
+            map: map,
+            icon: image
+        });*/
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDT5GHad8lN_BknHJ_UjaernDaY1SiQzfY&callback=initMap&libraries=visualization">
+</script>
+</body>
+</html>
