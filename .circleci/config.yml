@@ -39,6 +39,8 @@ jobs:
 
       # run tests!
       - run: mvn integration-test
+      - run: ls
+      - run: ls ./target
       - store_test_results:
           path: target/surefire-reports/*.xml
       - store_artifacts:
