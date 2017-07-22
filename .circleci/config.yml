@@ -40,14 +40,14 @@ jobs:
       # run tests!
       - run: mvn integration-test
       - run: |
-          mkdir -p /junit/
-          find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} /junit/ \;
+          mkdir -p ./junit/
+          find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ./junit/ \;
       - store_test_results:
-          path: /junit
+          path: ./junit
       - store_artifacts:
-          path: /junit
+          path: ./junit
       - run: |
-          mkdir -p /jars/
-          find . -type f -regex ".*/target/.*jar" -exec cp {} /jars/ \;
+          mkdir -p ./jars/
+          find . -type f -regex ".*/target/.*jar" -exec cp {} ./jars/ \;
       - store_artifacts:
-          path: /jars
+          path: ./jars
