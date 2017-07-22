@@ -25,14 +25,11 @@ import java.util.stream.Collectors;
 public class LightningConsumer implements Consumer<ValueWithTimestamp<LightningData>> {
     private final static Logger log = LoggerFactory.getLogger(LightningConsumer.class);
 
-    private final List<ValueWithTimestamp<LightningData>> data;
-
     private final LightningRepository repository;
 
     @Autowired
     public LightningConsumer(LightningRepository repository) {
         this.repository = repository;
-        data = new ArrayList<>();
     }
 
     @Override
