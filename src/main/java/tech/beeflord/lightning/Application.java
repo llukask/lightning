@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableSpringBootMetricsCollector
 @EnablePrometheusEndpoint
 @EnablePrometheusTiming
+@RestController
 public class Application extends SpringBootServletInitializer {
 
 	@Override
@@ -27,4 +30,8 @@ public class Application extends SpringBootServletInitializer {
 	}
 
 
+	@RequestMapping("")
+	public String health() {
+		return "Still surviving";
+	}
 }

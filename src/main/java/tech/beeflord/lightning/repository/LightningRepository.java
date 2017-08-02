@@ -7,6 +7,7 @@ import tech.beeflord.lightning.entity.Lightning;
 
 import java.time.Instant;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Lukas Kilian on 19/07/17.
@@ -14,4 +15,7 @@ import java.util.Collection;
 public interface LightningRepository extends CrudRepository<Lightning, Long> {
     @Query("select l from Lightning l where l.timestamp >= :timestamp")
     Collection<Lightning> getFrom(@Param("timestamp") Instant timestamp);
+
+    @Query("delete from Lightning l where l.timestamp < :timestamp")
+    void deleteTo(@Param("timestamp") Instant timestamp);
 }

@@ -51,6 +51,10 @@ public class LightningProducer {
         SubscriptionAdapter listener = new SubscriptionAdapter() {
             @Override
             public void onSubscriptionData(SubscriptionData data) {
+                // log.info("data.position = {}", data.getPosition());
+                if(data.getMessagesAsStrings().size() != 1) {
+                    log.debug("Messages {}", data.getMessagesAsStrings().size());
+                }
                 data.getMessages().forEach(a -> {
                     LightningData lt = a.convertToType(LightningData.class);
                     //log.info(lt.toString());
